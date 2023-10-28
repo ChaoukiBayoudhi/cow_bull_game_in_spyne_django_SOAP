@@ -79,3 +79,16 @@ class GameService(ServiceBase):
 
 #Create the Django Application to be called remotely
 #using Soap11, lxml and the GameService class
+spyne_app=Application(
+  [GameService],
+  #target namespace
+  #it contains the tags (like <play_game>,</play_game>, ....) definitions
+  tns='http://isg.soa.game.tn',
+  #lxml is a library to check the XML, HTML and XHTML definitions
+  in_protocol=Soap11(validator='lxml'), #for The SOAP-REQUEST Entity
+  out_protocol=Soap11() #for The SOAP-RESPONSE Entity
+)
+#create the DjangoApplication instance
+django_app=DjangoApplication(spyne_app)
+#create the instance that will be used to respond to The SOAP-REQUESTs
+cb_game_app=csrf_exempt(django_app)
