@@ -19,5 +19,5 @@ from django.urls import path
 from cb_game import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('cb_game/',views.cb_game_soap_app),
+    path('cb_game/',views.cb_game_app),
 ]
