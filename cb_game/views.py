@@ -27,6 +27,7 @@ class GameService(ServiceBase):
 
     @rpc(Unicode(nillable=True),Integer(nillable=True),_returns=Unicode(nillable=False))
     def start_game(self, player_name="guess player", nb_attempts=10):
+        GameService._hidden_number=set()
         GameService._hidden_number.add(random.randint(1,9))
         while(len(GameService._hidden_number)<4):
             GameService._hidden_number.add(random.randint(0,9))
